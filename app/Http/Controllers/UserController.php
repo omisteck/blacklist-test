@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserRegistered;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -32,6 +33,10 @@ class UserController extends Controller
         	'email' => $request->email,
         	'password' => Hash::make($request->password)
         ]);
+        
+        //Sending email to the registered user with event 
+        event(new UserRegistered($request->name, $request->email));
+
 
         //User created, return success response
         return response()->json([
