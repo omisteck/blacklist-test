@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Jobs\SampleProduct;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Validator;
@@ -162,5 +163,12 @@ class ProductController extends Controller
             'success' => true,
             'message' => 'Product deleted successfully'
         ], 200);
+    }
+
+
+    public function sample()
+    {
+        $sampleProductJob = new SampleProduct();
+        $this->dispatch($sampleProductJob);
     }
 }
