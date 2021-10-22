@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProductsExport;
 use App\Models\Product;
 use App\Jobs\SampleProduct;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -170,5 +172,10 @@ class ProductController extends Controller
     {
         $sampleProductJob = new SampleProduct();
         $this->dispatch($sampleProductJob);
+    }
+
+    public function download()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
     }
 }

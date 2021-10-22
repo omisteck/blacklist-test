@@ -26,8 +26,9 @@ Route::post('register', [UserController::class, 'register']);
 
 Route::get('sample/product', [ProductController::class, 'sample']);
 
-Route::group(['middleware' => ['jwt.verify','cors']], function() {
+Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [UserController::class, 'logout']);
     Route::resource('products', ProductController::class);
+    Route::get('download/products', [ProductController::class, 'download']);
     Route::resource('categories', CategoryController::class);
 });
