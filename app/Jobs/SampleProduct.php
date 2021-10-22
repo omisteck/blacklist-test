@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Models\User;
 use App\Models\Product;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -33,6 +32,6 @@ class SampleProduct implements ShouldQueue
      */
     public function handle()
     {
-        User::factory(2)->create();
+        Product::factory(2)->create();
     }
 }
